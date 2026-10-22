@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101313">
+<meta name="description" content="Lattice Mods — thoughtful Minecraft visuals, tools, and community projects.">
+<title>Lattice Mods — Built for your worlds</title>
+<style>
+:root{--bg:#101313;--panel:#171b1a;--panel2:#1d2320;--text:#f0f3ed;--muted:#a5afa7;--line:rgba(235,245,236,.12);--mint:#b7f2ce;--mint2:#7cd9a4;--max:1180px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+button,a{ -webkit-tap-highlight-color:transparent}
+.wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+.topline{height:3px;background:linear-gradient(90deg,#7cd9a4,#d9f8e4 45%,#3e8b69)}
+header{position:sticky;top:0;z-index:10;background:rgba(16,19,19,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.045em;font-size:20px}
+.mark{width:36px;height:36px;border:1px solid rgba(183,242,206,.6);border-radius:11px;display:grid;place-items:center;color:var(--mint);font-size:17px;font-weight:800;position:relative;overflow:hidden}
+.mark:before,.mark:after{content:"";position:absolute;width:46px;height:1px;background:rgba(183,242,206,.4);transform:rotate(-45deg)}
+.mark:after{transform:rotate(45deg)}
+.mark span{position:relative;background:#101313;padding:0 4px}
+.brand small{display:block;font-size:10px;letter-spacing:.19em;color:var(--muted);font-weight:650;margin-top:-3px}
+.links{display:flex;gap:30px;align-items:center;color:#c3cbc4;font-size:13px;font-weight:650}
+.links a:hover{color:var(--mint)}
+.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 17px;border-radius:9px;border:1px solid var(--line);font-size:13px;font-weight:750;transition:transform .2s,background .2s,border .2s}
+.nav-cta:hover,.button:hover{transform:translateY(-2px);border-color:rgba(183,242,206,.55)}
+.button.primary{background:var(--mint);color:#102017;border-color:var(--mint)}
+.button.primary:hover{background:#d0f8df}
+.button.ghost{background:rgba(255,255,255,.035)}
+.menu{display:none;background:none;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:18px}
+.hero{padding:76px 0 64px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-15% -10% auto 38%;height:620px;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,rgba(93,151,113,.2),rgba(28,61,45,.08) 38%,transparent 68%);filter:blur(14px)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--mint);text-transform:uppercase;letter-spacing:.16em;font-size:10px;font-weight:800}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 16px #7cd9a4}
+h1{font-size:clamp(48px,6.3vw,78px);line-height:.98;letter-spacing:-.075em;margin:23px 0 22px;font-weight:790;max-width:650px}
+h1 em{font-style:normal;color:var(--mint)}
+.lead{font-size:17px;line-height:1.75;color:#b7c1b9;max-width:520px;margin:0 0 30px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.micro{display:flex;align-items:center;gap:13px;margin-top:29px;color:#8f9a92;font-size:11px}
+.micro .rule{width:34px;height:1px;background:#536259}
+.visual{min-height:440px;position:relative;border:1px solid rgba(230,244,233,.17);border-radius:20px;overflow:hidden;background:#17201b;isolation:isolate}
+.visual:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,13,11,.05),rgba(8,13,11,.1) 43%,rgba(8,13,11,.85)),radial-gradient(ellipse at 60% 28%,rgba(205,240,216,.4),transparent 26%),linear-gradient(130deg,#5e8172,#2a4b3c 43%,#192b24 72%,#0d1512);z-index:-2}
+.fog{position:absolute;inset:0;overflow:hidden;z-index:-1}
+.fog i{position:absolute;display:block;border-radius:50%;filter:blur(24px);background:rgba(218,241,222,.22);width:120%;height:23%;left:-10%;top:35%;transform:rotate(-10deg)}
+.fog i:nth-child(2){top:48%;left:-25%;height:16%;background:rgba(219,239,224,.17);transform:rotate(8deg);filter:blur(17px)}
+.fog i:nth-child(3){top:61%;left:-5%;height:20%;background:rgba(204,228,210,.16);transform:rotate(-3deg);filter:blur(27px)}
+.ridge{position:absolute;bottom:0;left:0;right:0;height:66%;clip-path:polygon(0 58%,13% 35%,22% 46%,36% 15%,49% 42%,62% 21%,76% 47%,87% 30%,100% 52%,100% 100%,0 100%);background:linear-gradient(160deg,#263d30,#101b15 75%);opacity:.92}
+.ridge.back{height:77%;bottom:4%;opacity:.48;transform:scaleX(-1);background:linear-gradient(150deg,#9cb4a0,#324d3b 68%,#18291f)}
+.tree-line{position:absolute;bottom:0;left:-4%;width:108%;height:48%;background:linear-gradient(180deg,#233d2d,#0b1510);clip-path:polygon(0 55%,4% 37%,7% 59%,10% 20%,13% 60%,17% 35%,21% 67%,24% 12%,27% 59%,31% 36%,35% 65%,39% 17%,43% 62%,48% 32%,52% 66%,56% 8%,60% 57%,64% 29%,69% 68%,73% 16%,77% 60%,82% 34%,86% 65%,90% 21%,94% 59%,98% 34%,100% 56%,100% 100%,0 100%)}
+.visual-label{position:absolute;left:24px;right:24px;bottom:23px;display:flex;align-items:flex-end;justify-content:space-between;gap:18px}
+.visual-label strong{display:block;font-size:13px;letter-spacing:.02em}
+.visual-label span{display:block;font-size:11px;color:#c4d3c8;margin-top:4px}
+.visual-chip{border:1px solid rgba(255,255,255,.24);border-radius:7px;padding:7px 9px;font-size:10px;color:#e1eee4;background:rgba(8,17,12,.3);white-space:nowrap}
+.section{padding:75px 0}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:28px}
+.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.17em;font-weight:800;color:var(--mint)}
+h2{font-size:clamp(29px,4vw,43px);line-height:1.1;letter-spacing:-.055em;margin:10px 0 0}
+.section-intro{color:var(--muted);font-size:13px;max-width:365px;margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#1a201d,#141817);overflow:hidden;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:rgba(183,242,206,.35)}
+.card-art{height:170px;position:relative;overflow:hidden;background:#1b2920}
+.card-art.fog-art{background:radial-gradient(ellipse at 55% 35%,#a7c4ad 0,transparent 22%),linear-gradient(170deg,#496e59,#1b3326 55%,#111a14)}
+.card-art.fog-art:before{content:"";position:absolute;inset:38% -10% 0;background:linear-gradient(180deg,rgba(223,239,224,.1),rgba(9,19,12,.9));filter:blur(5px)}
+.card-art.fog-art:after{content:"";position:absolute;left:-10%;right:-10%;top:48%;height:35%;background:rgba(227,242,229,.38);filter:blur(24px);transform:rotate(-8deg)}
+.card-art.texture{background:radial-gradient(circle at 30% 40%,rgba(183,242,206,.17),transparent 30%),repeating-linear-gradient(135deg,#202b25 0 2px,#18211c 2px 14px)}
+.card-art.texture:after{content:"";position:absolute;inset:20%;border:1px solid rgba(183,242,206,.22);transform:rotate(22deg);box-shadow:0 0 0 18px rgba(183,242,206,.025),0 0 0 38px rgba(183,242,206,.025)}
+.card-art.lab{background:radial-gradient(ellipse at 65% 25%,rgba(183,242,206,.3),transparent 22%),linear-gradient(140deg,#27382f,#111715)}
+.card-art.lab:before{content:"";position:absolute;width:200px;height:200px;left:25%;top:10%;border:1px solid rgba(183,242,206,.32);transform:rotate(45deg);box-shadow:0 0 0 22px rgba(183,242,206,.03),0 0 0 45px rgba(183,242,206,.03)}
+.card-body{padding:22px}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.card h3{margin:0;font-size:18px;letter-spacing:-.03em}
+.pill{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);border:1px solid rgba(183,242,206,.25);padding:5px 7px;border-radius:5px;white-space:nowrap}
+.card p{color:var(--muted);font-size:12px;line-height:1.75;margin:12px 0 19px;min-height:43px}
+.card-link{font-size:12px;font-weight:750;color:#dce9df;display:inline-flex;align-items:center;gap:8px}
+.card-link span{color:var(--mint);font-size:17px}
+.band{padding:36px;border-radius:17px;border:1px solid rgba(183,242,206,.19);background:radial-gradient(ellipse at 80% 0%,rgba(97,157,116,.16),transparent 48%),#171d19;display:flex;justify-content:space-between;align-items:center;gap:28px}
+.band h2{font-size:clamp(26px,3.5vw,38px);max-width:580px}
+.band p{color:var(--muted);font-size:13px;max-width:530px;margin:12px 0 0}
+.band .actions{flex-shrink:0}
+footer{border-top:1px solid var(--line);padding:26px 0 34px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:22px;color:#89958d;font-size:11px}
+.foot-brand{display:flex;align-items:center;gap:10px;color:#dfe8e0;font-weight:750;font-size:13px}
+.foot-brand .mark{width:28px;height:28px;border-radius:8px;font-size:13px}
+.foot-links{display:flex;gap:20px}
+.foot-links a:hover{color:var(--mint)}
+.note{color:#6f7b72;font-size:10px;margin-top:18px}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero{padding-top:56px}.visual{min-height:360px}.cards{grid-template-columns:1fr 1fr}.card:last-child{grid-column:span 2}.section-head{align-items:flex-start;flex-direction:column}.band{align-items:flex-start;flex-direction:column}.links{gap:18px}}
+@media(max-width:600px){.wrap{width:min(var(--max),calc(100% - 32px))}.nav{height:66px}.links{display:none;position:absolute;top:66px;left:0;right:0;background:#141918;padding:18px 22px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.links.open{display:flex}.nav-cta{display:none}.menu{display:block}.hero{padding:46px 0 40px}h1{font-size:52px}.lead{font-size:15px}.visual{min-height:315px}.section{padding:54px 0}.cards{grid-template-columns:1fr}.card:last-child{grid-column:auto}.card-art{height:155px}.band{padding:25px}.foot{align-items:flex-start;flex-direction:column}.foot-links{flex-wrap:wrap}.visual-label{left:17px;right:17px;bottom:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Lattice Mods home">
+      <span class="mark"><span>L</span></span>
+      <span>LATTICE<small>MODS</small></span>
+    </a>
+    <nav class="links" id="navlinks" aria-label="Main navigation">
+      <a href="#projects">Projects</a><a href="#approach">Our approach</a><a href="#community">Community</a>
+    </nav>
+    <a class="nav-cta" href="#projects">Explore projects <span aria-hidden="true">↗</span></a>
+    <button class="menu" id="menu" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </div>
+</header>
+<main id="home">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Independent Minecraft projects</div>
+        <h1>Make your world<br>feel <em>different.</em></h1>
+        <p class="lead">Lattice Mods creates thoughtful visual experiences for Minecraft — built around atmosphere, detail, and the little things that make a world feel alive.</p>
+        <div class="actions">
+          <a class="button primary" href="#projects">Explore our work <span aria-hidden="true">↗</span></a>
+          <a class="button ghost" href="#approach">What we're about</a>
+        </div>
+        <div class="micro"><span class="rule"></span> Built with care. Designed to feel like Minecraft.</div>
+      </div>
+      <div class="visual" role="img" aria-label="Stylized misty forest landscape with layered hills and atmospheric fog">
+        <div class="fog"><i></i><i></i><i></i></div>
+        <div class="ridge back"></div><div class="ridge"></div><div class="tree-line"></div>
+        <div class="visual-label">
+          <div><strong>ATMOSPHERE, REIMAGINED.</strong><span>Introducing the world of Lattice</span></div>
+          <div class="visual-chip">VISUAL PROJECTS / 001</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">The work</div><h2>Made for worlds worth exploring.</h2></div>
+        <p class="section-intro">A growing collection of experiments and releases. Every project starts with a simple idea: make the experience feel better.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-art fog-art" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="card-top"><h3>Lattice Shaders</h3><span class="pill">In development</span></div>
+            <p>Atmospheric visuals with photorealistic-inspired fog, natural depth, and a cinematic sense of distance.</p>
+            <a class="card-link" href="#community">Follow development <span>→</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-art texture" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="card-top"><h3>Lattice Textures</h3><span class="pill">Planned</span></div>
+            <p>A considered material style, with resolution options designed to suit different devices and preferences.</p>
+            <a class="card-link" href="#community">Get updates <span>→</span></a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-art lab" aria-hidden="true"></div>
+          <div class="card-body">
+            <div class="card-top"><h3>More, over time</h3><span class="pill">Exploring</span></div>
+            <p>Small experiments, useful tools, and future projects shaped by the community and what we learn.</p>
+            <a class="card-link" href="#approach">Our approach <span>→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="approach">
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <div class="kicker">Our approach</div>
+          <h2>Atmosphere first. Everything else follows.</h2>
+          <p>We want visual upgrades to feel intentional — not just brighter or busier. Lattice starts with believable distance, soft transitions, and details that support the world instead of overpowering it.</p>
+        </div>
+        <a class="button primary" href="#projects">See the direction <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="community">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">Stay in the loop</div><h2>Follow the build.</h2></div>
+        <p class="section-intro">Releases and community links will appear here as they become available. No fake download buttons, no made-up promises.</p>
+      </div>
+      <div class="band">
+        <div><h2 style="margin:0">Lattice Mods is just getting started.</h2><p>Come back as the first projects take shape.</p></div>
+        <a class="button ghost" href="#home">Back to top ↑</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="foot-brand" href="#home"><span class="mark"><span>L</span></span> Lattice Mods</a>
+      <div>Independent fan-made projects. Not affiliated with Mojang or Microsoft.</div>
+      <div class="foot-links"><a href="#projects">Projects</a><a href="#approach">About</a><a href="#community">Community</a></div>
+    </div>
+    <div class="note">Concept website · Project status and community links can be updated before launch.</div>
+  </div>
+</footer>
+<script>
+const menu=document.getElementById('menu');
+const nav=document.getElementById('navlinks');
+menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'×':'☰'});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰'}));
+</script>
+</body>
+</html>
